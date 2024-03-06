@@ -2,9 +2,20 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            CardDeck cardDeck = new CardDeck();
+            string[] deckOfCards = cardDeck.InitializeDeck();
+
+
+            
+
+            foreach (string deck in deckOfCards)
+            {
+                Console.WriteLine(deck);
+            }
+
+
         }
     }
 }
