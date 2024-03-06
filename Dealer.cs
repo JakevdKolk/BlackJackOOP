@@ -9,7 +9,7 @@
         public string[] shuffleCards(string [] deckOfCards)
         {
 
-            //Get random method from C#
+            //Get the random class from C#
              Random rng = new Random();
             //Loop trough each item in deckOfCards
             for (int i = 0; i < deckOfCards.Length; i++)
@@ -20,6 +20,7 @@
                 deckOfCards[i] = deckOfCards[k];
                 deckOfCards[k] = temp;
             }
+            //Random the randomized list of cards
             return deckOfCards;
 
 
