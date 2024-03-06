@@ -9,7 +9,7 @@ namespace BlackJackOOP
 {
     internal class Player
     {
-        public Player(hit, stand) {
+        public Player() {
             
         }
     }

@@ -21,7 +21,7 @@ namespace BlackJackOOP
             {
                 Console.WriteLine(deck);
             }
-
+           
 
         }
     }
