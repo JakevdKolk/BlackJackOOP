@@ -1,27 +1,45 @@
-﻿using System.Numerics;
+﻿using System.Collections.Generic;
+using System.Numerics;
 
 namespace BlackJackOOP
 {
     internal class Program
     {
+
+ 
         static void Main()
         {
+
+            BlackjackSetup setup = new BlackjackSetup();
+            setup.blackjackUserOptions();
+
+            
+
+            
             CardDeck cardDeck = new CardDeck();
-            string[] deckOfCards = cardDeck.InitializeDeck();
-           
-            Player player = new Player();
+
+            //Initialze dealer
             Dealer dealer = new Dealer();
+
+
+            
+
+             string[] deckOfCards = cardDeck.initializeDeck();
+
+          
             dealer.shuffleCards(deckOfCards);
+            (string firstCard, string[] sortedDeckOfCards) = dealer.giveOutCards(deckOfCards);
+            deckOfCards = sortedDeckOfCards;
 
 
 
 
 
-            foreach (string deck in deckOfCards)
-            {
-                Console.WriteLine(deck);
-            }
-           
+              foreach (string deck in deckOfCards)
+              {
+                  Console.WriteLine(deck);
+              }
+
 
         }
     }

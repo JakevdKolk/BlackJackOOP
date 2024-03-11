@@ -7,10 +7,22 @@ using System.Threading.Tasks;
 
 namespace BlackJackOOP
 {
-    internal class Player
+    internal class PlayerBasic
     {
-        public Player() {
+
+        public string Name { get; set; }
+        public PlayerBasic() {
             
+        }
+
+
+        public void recieveCard(string card)
+        {
+
+        }
+      public void Hit()
+        {
+
         }
     }
 }

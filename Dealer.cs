@@ -1,11 +1,16 @@
-﻿namespace BlackJackOOP
+﻿using System.Linq;
+
+namespace BlackJackOOP
 {
-    internal class Dealer : Player
+    internal class Dealer : PlayerBasic
     {
         public Dealer() {
+
+            
            
         }
 
+       
         public string[] shuffleCards(string [] deckOfCards)
         {
 
@@ -25,4 +30,28 @@
 
 
          }
+
+        public (string ,string[]) giveOutCards(string[] deckOfCards)
+        {
+            // Get first Card
+            string firstCard = deckOfCards.First();
+
+            //Display first card to the console
+            Console.Write("Card = ");
+            Console.WriteLine(firstCard);
+            // Get array without the first index
+            string[] sortedDeckOfCards =  removeFirstIndexOfArray(deckOfCards);
+            return (firstCard, sortedDeckOfCards);
+        }
+
+        public string[] removeFirstIndexOfArray(string[] arrayOfValues)
+        {
+            // Create a smaller array
+            string[] arrayOfValuesWithoutFirstIndex = new string[arrayOfValues.Length - 1];
+            // Copy the original at the second index
+            Array.Copy(arrayOfValues, 1, arrayOfValuesWithoutFirstIndex, 0, arrayOfValuesWithoutFirstIndex.Length);
+
+
+            return arrayOfValuesWithoutFirstIndex;
+        }
 }}

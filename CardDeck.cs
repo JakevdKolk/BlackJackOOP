@@ -7,7 +7,7 @@ namespace BlackJackOOP
     {
 
         // Initialze card deck
-        public string[] InitializeDeck()
+        public string[] initializeDeck()
         {
             // Get suits
             string[] suits = Suit();
