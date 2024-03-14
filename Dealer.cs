@@ -31,7 +31,8 @@ namespace BlackJackOOP
 
          }
 
-        public (string ,string[]) giveOutCards(string[] deckOfCards)
+        public (string ,string[]) giveOutCards(string[] deckOfCards,PlayerBasic player
+            )
         {
             // Get first Card
             string firstCard = deckOfCards.First();
@@ -39,6 +40,19 @@ namespace BlackJackOOP
             //Display first card to the console
             Console.Write("Card = ");
             Console.WriteLine(firstCard);
+
+               if (player.cards == null)
+    {
+        player.cards = new string[] { firstCard }; // Initialize array if it's null
+    }
+    else
+    {
+        // Resize array to accommodate the new card
+        Array.Resize(ref player.cards, player.cards.Length + 1);
+        // Add the new card to the end of the array
+        player.cards[player.cards.Length - 1] = firstCard;
+    }
+
             // Get array without the first index
             string[] sortedDeckOfCards =  removeFirstIndexOfArray(deckOfCards);
             return (firstCard, sortedDeckOfCards);

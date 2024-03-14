@@ -83,7 +83,6 @@ namespace BlackJackOOP
                 // Set the player name with the value of i
 
                 player.Name = $"Player{i + 1}";
-                Console.WriteLine(player.Name); 
                 // Add player to the list
                 players.Add(player);
 
