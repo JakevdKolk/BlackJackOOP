@@ -11,7 +11,7 @@ namespace BlackJackOOP
     {
 
         public string Name { get; set; }
-        public string[] cards { get; set; }
+        public string[] Cards { get; set; }
         public PlayerBasic() {
             
         }

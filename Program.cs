@@ -13,11 +13,10 @@ namespace BlackJackOOP
             BlackjackSetup setup = new BlackjackSetup();
             List<PlayerBasic> players = setup.blackjackUserOptions();
 
-            /*
-            foreach(PlayerBasic player in players) {
-                Console.WriteLine(player.Name);
-            }*/
-            PlayerBasic player = new PlayerBasic();            
+            
+           
+            PlayerBasic player = new PlayerBasic(); 
+            player.Name = "Test";
             
             
             CardDeck cardDeck = new CardDeck();
@@ -34,28 +33,30 @@ namespace BlackJackOOP
 
           
             dealer.shuffleCards(deckOfCards);
+            //give out two cards
             for (int i = 0; i < 2; i++) {
-                (string firstCard, string[] sortedDeckOfCards) = dealer.giveOutCards(deckOfCards, player);
+                string[] sortedDeckOfCards = dealer.giveOutCards(deckOfCards, player);
 
                 deckOfCards = sortedDeckOfCards;
 
             }
 
-
-
-            foreach (string playertest in player.cards)
+            foreach (string deck in player.Cards)
             {
-                Console.WriteLine("with this i summon");
-                Console.WriteLine(playertest);
+                Console.WriteLine(deck);
             }
 
 
 
 
-            foreach (string deck in deckOfCards)
-              {
-                  Console.WriteLine(deck);
-              }
+
+
+
+
+            //            foreach (string deck in deckOfCards)
+            //            {
+            //              Console.WriteLine(deck);
+            //        }
 
 
         }
