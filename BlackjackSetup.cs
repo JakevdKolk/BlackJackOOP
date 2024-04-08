@@ -15,7 +15,7 @@ namespace BlackJackOOP
             
         }
 
-        public void setupOptionsChoice()
+        private void setupOptionsChoice()
         {
             Console.WriteLine("y/n");
             string option = Console.ReadLine();
@@ -29,7 +29,7 @@ namespace BlackJackOOP
             }
 
         }
-        public void blackjackOptions()
+        private void blackjackOptions()
         {  
             Console.WriteLine("You can edit your options here!??!?!?!");
             return;
@@ -70,7 +70,7 @@ namespace BlackJackOOP
            
         }
 
-        public List <PlayerBasic> initializePlayers( int playerCount)
+        private List <PlayerBasic> initializePlayers( int playerCount)
         {
             // Create a list of players
             List<PlayerBasic> players = new List<PlayerBasic>();

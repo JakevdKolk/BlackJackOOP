@@ -11,74 +11,58 @@ namespace BlackJackOOP
            
         }
 
-       
-        public string[] shuffleCards(string [] deckOfCards)
+
+        public IDictionary<string, int> shuffleCards(IDictionary<string, int> deckOfCards)
         {
+            // Convert the dictionary to a list of KeyValuePair
+            var list = deckOfCards.ToList();
+            
+            // Create a new random number generator
+            var rng = new Random();
 
-            //Get the random class from C#
-             Random rng = new Random();
-            //Loop trough each item in deckOfCards
-            for (int i = 0; i < deckOfCards.Length; i++)
+            // Shuffle the list
+            int n = list.Count;
+            while (n > 1)
             {
-                //Randomize the list of cards
-                //create new random index based of the deck of cards length
-                int k = rng.Next(deckOfCards.Length);
-                // get current item in the deck
-                string temp = deckOfCards[i];
-                //deck random deck of cards index becomes the randomized one
-                deckOfCards[i] = deckOfCards[k];
-                deckOfCards[k] = temp;
+                n--;
+                int k = rng.Next(n + 1);
+                var value = list[k];
+                list[k] = list[n];
+                list[n] = value;
             }
-            //Random the randomized list of cards
-            return deckOfCards;
+
+        
+            return list.ToDictionary(x => x.Key, x => x.Value);
+    
+            
+        }
 
 
-         }
-
-        public string[] giveOutCards(string[] deckOfCards,PlayerBasic player)
+        public void giveOutCards(IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
             // Get first Card
-            string firstCard = deckOfCards.First();
-
-
-           // foreach(string deck in deckOfCards) {
-            //Console.WriteLine(deck);
-            //}
-
+            KeyValuePair<string, int> firstCardPair = deckOfCards.First();
 
             if (player.Cards == null)
             {
-                player.Cards = new string[] { firstCard }; // Initialize array if it's null
+                player.Cards = new Dictionary<string, int>(); // Initialize dictionary if it's null
             }
-            else
+
+            // Add the first card to player's cards
+            player.Cards.Add(firstCardPair.Key, firstCardPair.Value);
+            Console.Write("First card pair ");
+            Console.WriteLine(firstCardPair.Key);
+            // Remove the first card from the deck
+            deckOfCards.Remove(firstCardPair.Key);
+            if (!player.checkIfBust(player))
             {
-                List<string> playerCardList = new List<string>(player.Cards);
-
-                playerCardList.Add(firstCard);
-                player.Cards = playerCardList.ToArray();
-               // foreach (string card in playerCardList)
-              //  {
-            //        Console.WriteLine(card);
-          //      }
-                // Resize array to accommodate the new card
-              //  foreach (string deckOfCard in player.Cards)
-             //   {
-                    
-                //   Console.WriteLine("With this player i!!!!!");
-                 //   Console.WriteLine(player.Name);
-                 //   Console.WriteLine(deckOfCard);
-
-                //}
-                // Add the new card to the end of the array
-                player.Cards[player.Cards.Length - 1] = firstCard;
+                player.pointCount = player.pointCount + firstCardPair.Value;
             }
-
-            // Get array without the first index
-            string[] sortedDeckOfCards =  removeFirstIndexOfArray(deckOfCards);
-            return sortedDeckOfCards;
+  
+    
         }
 
-        public string[] removeFirstIndexOfArray(string[] arrayOfValues)
+        private string[] removeFirstIndexOfArray(string[] arrayOfValues)
         {
             // Create a smaller array
             string[] arrayOfValuesWithoutFirstIndex = new string[arrayOfValues.Length - 1];

@@ -12,7 +12,7 @@ namespace BlackJackOOP
 
             BlackjackSetup setup = new BlackjackSetup();
             List<PlayerBasic> players = setup.blackjackUserOptions();
-
+            Card card = new Card();
             
            
             PlayerBasic player = new PlayerBasic(); 
@@ -23,28 +23,39 @@ namespace BlackJackOOP
 
             //Initialze dealer
             Dealer dealer = new Dealer();
+            cardDeck.initializeDeck();
+
+     
 
 
-           
 
-            
 
-             string[] deckOfCards = cardDeck.initializeDeck();
+            cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
 
-          
-            dealer.shuffleCards(deckOfCards);
-            //give out two cards
-            for (int i = 0; i < 2; i++) {
-                string[] sortedDeckOfCards = dealer.giveOutCards(deckOfCards, player);
 
-                deckOfCards = sortedDeckOfCards;
 
-            }
-
-            foreach (string deck in player.Cards)
+            foreach (KeyValuePair<string, int> cardType in cardDeck.cardDeck)
             {
-                Console.WriteLine(deck);
+                Console.Write(cardType.Key);
+                Console.WriteLine(cardType.Value);
+
             }
+
+            //give out two cards
+          
+          
+            player.Hit(dealer, cardDeck.cardDeck, player);
+            Console.WriteLine("Hit");
+            player.Hit(dealer, cardDeck.cardDeck, player);
+
+            Console.WriteLine("second loop");
+            foreach (KeyValuePair<string, int> cardType in player.Cards)
+            {
+                Console.Write(cardType.Key);
+                Console.WriteLine(cardType.Value);
+
+            }
+
 
 
 
