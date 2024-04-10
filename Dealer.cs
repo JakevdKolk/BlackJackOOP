@@ -37,9 +37,10 @@ namespace BlackJackOOP
             
         }
 
-
+    
         public void giveOutCards(IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
+
             // Get first Card
             KeyValuePair<string, int> firstCardPair = deckOfCards.First();
 
@@ -57,9 +58,24 @@ namespace BlackJackOOP
             if (!player.checkIfBust(player))
             {
                 player.pointCount = player.pointCount + firstCardPair.Value;
+                return;
             }
-  
-    
+             else if (player.checkIfSecondHand(player))
+            {
+                KeyValuePair<string, int> secondCardPair = deckOfCards.First();
+                deckOfCards.Remove(secondCardPair.Key);
+
+                giveToSecondHand(secondCardPair, player);
+                return;
+            }
+            return;
+
+
+        }
+
+        public void giveToSecondHand(KeyValuePair<string, int> secondCardPair, PlayerBasic player) {
+            
+            player.secondHand.Add(secondCardPair);
         }
 
         private string[] removeFirstIndexOfArray(string[] arrayOfValues)
