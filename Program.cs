@@ -14,37 +14,10 @@ namespace BlackJackOOP
             List<PlayerBasic> players = setup.blackjackUserOptions();
             Card card = new Card();
             blackjackAI ai = new blackjackAI();
-            
-            
-           
-            PlayerBasic player = new PlayerBasic(); 
-            player.Name = "Test";
-           
-            foreach (PlayerBasic p in players)
-            {
-                int actionCount = 2;
-               
-                if(p.pointCount !> 21)
-                {
-                    if (p.checkIfDouble(p))
-                    {
-                        actionCount++;
-                        //p.Double(p);
-                    }
-                    if (p.checkIfSplit(p))
-                    {
 
-                    }
-                    
-                }
-                else
-                {
-                    Console.WriteLine("Player lost");
-                }
-
-            }
-            
             CardDeck cardDeck = new CardDeck();
+
+
 
             //Initialze dealer
             Dealer dealer = new Dealer();
@@ -52,7 +25,43 @@ namespace BlackJackOOP
 
             Chips chips = new Chips();
 
-            chips.initializeChipCount(player);
+            //chips.initializeChipCount(player);
+
+            PlayerBasic player = new PlayerBasic(); 
+            player.Name = "Test";
+
+            cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
+
+            foreach (PlayerBasic p in players)
+            {
+
+                dealer.giveOutCards(cardDeck.cardDeck, p);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.WriteLine("its " + p.Name + " turn");
+
+
+
+                   if(!p.checkIfBust(p)) {
+
+                       ai.Handle_actions(dealer, p, cardDeck.cardDeck);
+
+
+                    }
+
+
+
+
+
+
+
+
+                }
+            }
+            /*
+           
+
 
 
             cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
@@ -73,7 +82,6 @@ namespace BlackJackOOP
             Console.WriteLine("Hit");
             //player.Hit(dealer, cardDeck.cardDeck, player);
             player.stand(player);
-            player.Split(player);
 
 
             Console.Write("Pointcount: ");
@@ -102,7 +110,7 @@ namespace BlackJackOOP
             //              Console.WriteLine(deck);
             //        }
 
-
+            */
         }
     }
 }
