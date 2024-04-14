@@ -16,17 +16,18 @@ namespace BlackJackOOP
 
         public int pointCount  {get; set;}
                 
-        private bool hasStood { get; set; }
+        public bool hasStood { get; set; }
 
         public int chips { get; set; }
         public PlayerBasic() {
+            hasStood = false;
         }
 
 
       
       public void Hit(Dealer dealer, IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
-            Console.WriteLine("The player has hit!!");
+            Console.WriteLine(player.Name + " has hit!!");
             dealer.giveOutCards(deckOfCards, player);
             checkPointCount(player);
 
@@ -34,7 +35,7 @@ namespace BlackJackOOP
         public void stand(PlayerBasic player) {
 
             
-            Console.WriteLine("The player has stood!!");
+            Console.WriteLine(player.Name + " has stood!!");
             checkPointCount(player);
             player.hasStood = true;
 
@@ -42,7 +43,7 @@ namespace BlackJackOOP
         //voeg hier chips aan toe
         public void Double(PlayerBasic player)
         {
-            Console.WriteLine("The player has doubled!!");
+            Console.WriteLine(player.Name + " has doubled!!");
             checkPointCount(player);
             player.pointCount = player.pointCount + player.pointCount;
             // double the chip count

@@ -69,13 +69,21 @@ namespace BlackJackOOP
            
            
         }
+        private List <PlayerBasic> initDealerPlayer(List<PlayerBasic> dealerPlayer)
+        {
+            PlayerBasic player = new PlayerBasic();
+            player.Name = "Dealer";
+            dealerPlayer.Add(player);
+            return dealerPlayer;
+        }
 
         private List <PlayerBasic> initializePlayers( int playerCount)
         {
             // Create a list of players
             List<PlayerBasic> players = new List<PlayerBasic>();
+            initDealerPlayer(players);
 
-          
+
             for (int i = 0; i < playerCount; i++)
             {
                 // Create a new player

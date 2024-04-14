@@ -5,24 +5,74 @@
 
         public void Handle_actions(Dealer dealer,PlayerBasic player, IDictionary<string, int> deckOfCards)
         {
-
-            if (checkIfDouble(player))
+           string[] actions = getActions(player);
+            if(player.Name == "Dealer")
             {
-                player.Double(player);
-                 return;
-            }
-            else if(player.pointCount >= 17) {
-                player.stand(player);
-                return;
+                Console.WriteLine(player.Name + " you have " + player.pointCount + " points");
+                Console.Write("you can ");
+                for(int i = 0; i < actions.Length; i++)
+                {
+                    Console.Write(actions[i] + " ");
+                }
+                Console.WriteLine();
+                Console.WriteLine("What whould you like to do: ");
+                string playerAction = Console.ReadLine();
+                foreach(string action in actions)
+                {
+                    if (action == playerAction && action == "hit")
+                    {
+                        player.Hit(dealer, deckOfCards, player);
+                    }
+                    else if (action == playerAction && action == "double")
+                    {
+                        player.Double(player);
+                    }
+                    else if(action == playerAction && action == "stand")
+                    {
+                        player.stand(player);
+                    }
+                }
+                
             }
             else
             {
-                
-                player.Hit(dealer, deckOfCards, player);
+                if (checkIfDouble(player))
+                {
+                    player.Double(player);
+                    return;
+                }
+                else if (player.pointCount >= 17)
+                {
+                    player.stand(player);
+                    return;
+                }
+                else
+                {
+
+                    player.Hit(dealer, deckOfCards, player);
+                }
             }
+           
 
             
 
+        }
+
+        private string[] getActions(PlayerBasic player) {
+
+
+            if (!player.hasStood)
+            {
+                string[] actions = ["hit", "stand"];
+                List<string> actionsList = new List<string>(actions);
+                if (checkIfDouble(player))
+                {
+                    actionsList.Add("double");                   
+                }
+
+                return actionsList.ToArray();
+            }
+            return [""];
         }
 
         public bool checkIfDouble(PlayerBasic player)

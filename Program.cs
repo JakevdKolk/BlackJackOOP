@@ -34,11 +34,11 @@ namespace BlackJackOOP
 
             foreach (PlayerBasic p in players)
             {
+                
 
                 dealer.giveOutCards(cardDeck.cardDeck, p);
 
-                for (int i = 0; i < 3; i++)
-                {
+                
                     Console.WriteLine("its " + p.Name + " turn");
 
 
@@ -57,7 +57,7 @@ namespace BlackJackOOP
 
 
 
-                }
+                
             }
             /*
            
