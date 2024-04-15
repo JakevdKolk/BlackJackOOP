@@ -1,0 +1,47 @@
+@startuml
+
+    class Program{
+        {static}main():void
+    }
+    class CardDeck{
+        + initializeDeck():string[]
+        - suit(cardNames:string[]):string[]
+        - deckOfCards (suit:string):string[]
+    }
+    class BlackjackSetup{
+        - setupOptionsChoice():void
+        - blackjackOptions():void
+        + blackjackUserOptions():List<playerBasic>
+        - initializePlayers(int:playerCount):List<playerBasic>
+    }
+    class Dealer{
+        + shuffleCards(deckOfCards:string[]):string[]
+        + giveOutCards(deckOfCards:string[], player:PlayerBasic):string[]
+        + dealChips(chips)
+        - removeFirstIndexOfArray(arrayOfValues:string[]):string[]
+
+    }
+    class PlayerBasic{
+        + checkWinner()
+        + recieveCards(card:string):void
+        + countChips()
+        + hit(dealer:Dealer, deckOfCards:[String, Int], player:PlayerBasic):void
+        + stand(player:PlayerBasic):void
+        + double(player:PlayerBasic):void
+        + checkIfBust(player:PlayerBasic):bool
+        - checkPointCount(player:PlayerBasic):void
+    }
+    class Chips{
+     + initializeChipCount(player:PlayerBasic):void
+    }
+    class blackjackAI{
+      + handle_actions(dealer:Dealer,player:PlayerBasic,deckOfCards:[String,Int]):void
+      - getActions(player:PlayerBasic):string[]
+      - checkIfDouble(player:PlayerBasic):bool
+      - checkItemContains(player:PlayerBasic, checkItems:int[]):bool
+    }
+
+    Dealer <|-- PlayerBasic
+    DealerScore <|-- Dealer
+
+@enduml
