@@ -26,17 +26,32 @@ namespace BlackJackOOP
 
         }
 
-        
-        public void initializePlayerChipCount(List<PlayerBasic> players ,Dealer dealer)
+
+        public void initializePlayerChipCount(List<PlayerBasic> players, Dealer dealer)
         {
             int playercount = players.Skip(1).Count();
-            Console.WriteLine
-                (dealer.tableChips);
+
             //give 10% of the table to the players
             int calcChips = dealer.tableChips / 10 / playercount;
-            Console.WriteLine(calcChips);
-            foreach (PlayerBasic player in players.Skip(1)) {
-                player.chips = calcChips;
+            string dealerInput = dealer.checkAction("some chips");
+            if (dealerInput == "1")
+            {
+
+
+                foreach (PlayerBasic player in players.Skip(1))
+                {
+                    player.chips = calcChips;
+                }
+            }
+            else if (dealerInput == "2")
+            {
+                Console.WriteLine("dealer didn't give the players chips");
+                // decrease point total
+
+            }
+            else
+            {
+                initializePlayerChipCount(players, dealer);
             }
         }
 

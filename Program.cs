@@ -29,10 +29,25 @@ namespace BlackJackOOP
 
 
             cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
-
+            bool allPlayersStood = false;
+            int playerCount = players.Count;
+            int playersWhoHaveStood = 0;
+            int[] dupes = new int[playerCount];
+            while (allPlayersStood == false) {
+                int playersIndex = 0;
             foreach (PlayerBasic p in players)
             {
-
+                    if(playerCount == playersWhoHaveStood)
+                    {
+                        ai.handleWinner(players);
+                        allPlayersStood = true;
+                        break;
+                    }
+                    if (ai.checkGameStatus(playersIndex, dupes[playersIndex]))
+                    {
+                        dupes[playersIndex] = playersIndex;
+                        playersWhoHaveStood++;
+                    }
                 
 
                 dealer.giveOutCards(cardDeck.cardDeck, p);
@@ -55,8 +70,9 @@ namespace BlackJackOOP
                    Console.WriteLine(p.Name + " has " + p.pointCount + " points");
 
 
-
+                    playersIndex++;
                 
+            }
             }
             /*
            

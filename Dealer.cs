@@ -66,10 +66,10 @@ namespace BlackJackOOP
 
         }
 
-        public string checkHit(PlayerBasic player)
+        public string checkAction(string action)
         {
             Console.WriteLine("what will you do Dealer?");
-            Console.WriteLine("1 give him a card, 2 don't give him a card");
+            Console.WriteLine("1 give " + action + ", 2 don't give " + action);
            string userInput = Console.ReadLine();
             return userInput;
 
