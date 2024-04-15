@@ -63,8 +63,16 @@
 
             if (!player.hasStood)
             {
-                string[] actions = ["hit", "stand"];
+                string[] actions = ["hit"];
                 List<string> actionsList = new List<string>(actions);
+                if(player.Name == "Dealer" && player.pointCount > 17)
+                {
+                    actionsList.Add("stand");
+                }
+                else
+                {
+                    actionsList.Add("stand");
+                }
                 if (checkIfDouble(player))
                 {
                     actionsList.Add("double");                   
