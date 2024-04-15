@@ -1,4 +1,7 @@
-﻿namespace BlackJackOOP
+﻿using System.Numerics;
+using System;
+
+namespace BlackJackOOP
 {
     internal class blackjackAI
     {
@@ -21,6 +24,7 @@
             {
                 if(player.pointCount >= highestPointCount && player.pointCount <= 21)
                 {
+                    Console.WriteLine(player.pointCount);
                     winners[winnerIndex] = true;
                     highestPointCount = player.pointCount;
                 }
@@ -35,35 +39,39 @@
                 winnerIndex++;
             }
         }
+        public void dealerActions(Dealer dealer, PlayerBasic player, IDictionary<string, int> deckOfCards)
+        {
+            string[] actions = getActions(player);
+            Console.Write("you can ");
+
+            for (int i = 0; i < actions.Length; i++)
+            {
+                Console.Write(actions[i] + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("What whould you like to do: ");
+            string playerAction = Console.ReadLine();
+            foreach (string action in actions)
+            {
+                if (action == playerAction && action == "hit")
+                {
+                    player.Hit(dealer, deckOfCards, player);
+                }
+                else if (action == playerAction && action == "double")
+                {
+                    player.Double(player);
+                }
+                else if (action == playerAction && action == "stand")
+                {
+                    player.stand(player);
+                }
+            }
+        }
         public void Handle_actions(Dealer dealer,PlayerBasic player, IDictionary<string, int> deckOfCards)
         {
-           string[] actions = getActions(player);
             if(player.Name == "Dealer")
             {
-               // Console.WriteLine(player.Name + " you have " + player.pointCount + " points");
-                Console.Write("you can ");
-                for(int i = 0; i < actions.Length; i++)
-                {
-                    Console.Write(actions[i] + " ");
-                }
-                Console.WriteLine();
-                Console.WriteLine("What whould you like to do: ");
-                string playerAction = Console.ReadLine();
-                foreach(string action in actions)
-                {
-                    if (action == playerAction && action == "hit")
-                    {
-                        player.Hit(dealer, deckOfCards, player);
-                    }
-                    else if (action == playerAction && action == "double")
-                    {
-                        player.Double(player);
-                    }
-                    else if(action == playerAction && action == "stand")
-                    {
-                        player.stand(player);
-                    }
-                }
+                dealerActions(dealer, player, deckOfCards);
                 
             }
             else

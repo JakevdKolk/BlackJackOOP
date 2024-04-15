@@ -33,11 +33,16 @@ namespace BlackJackOOP
             int playerCount = players.Count;
             int playersWhoHaveStood = 0;
             int[] dupes = new int[playerCount];
+            dealer.giveOutFirstCard(cardDeck, players);
             while (allPlayersStood == false) {
                 int playersIndex = 0;
-            foreach (PlayerBasic p in players)
+                foreach (PlayerBasic p in players)
             {
-                    if(playerCount == playersWhoHaveStood)
+
+
+                    dealer.giveOutCards(cardDeck.cardDeck, p);
+
+                    if (playerCount == playersWhoHaveStood)
                     {
                         ai.handleWinner(players);
                         allPlayersStood = true;
@@ -48,10 +53,7 @@ namespace BlackJackOOP
                         dupes[playersIndex] = playersIndex;
                         playersWhoHaveStood++;
                     }
-                
-
-                dealer.giveOutCards(cardDeck.cardDeck, p);
-
+      
                 
                     Console.WriteLine("its " + p.Name + " turn");
 

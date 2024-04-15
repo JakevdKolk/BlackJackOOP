@@ -38,12 +38,22 @@ namespace BlackJackOOP
     
             
         }
+        public void giveOutFirstCard(CardDeck cardDeck, List<PlayerBasic> players)
+        {
+            foreach (PlayerBasic player in players)
+            {
+                giveOutCards(cardDeck.cardDeck, player);
 
-    
+            }
+
+        }
+
+
         public void giveOutCards(IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
 
             // Get first Card
+   
             KeyValuePair<string, int> firstCardPair = deckOfCards.First();
 
             if (player.Cards == null)
