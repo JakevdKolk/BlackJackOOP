@@ -1,1 +1,53 @@
+@startuml
 
+
+
+actor dealer
+
+actor player
+
+
+actor Console
+
+player --|> dealer #DarkGreen
+
+package "Blackjack" as blackjack {
+    usecase "shuffle cards" as shuffleCards
+    usecase "deal out cards" as dealCards
+    usecase "hit" as hit
+    usecase "stand" as stand
+    usecase "deal out chips" as dealChips
+    usecase "count score" as countScore
+    usecase "determine winner" as determineWinner
+    usecase "give out score" as giveScore
+    usecase "access options" as accessOptions
+    usecase "set player Count" as setPlayerCount
+    usecase "double" as double
+}
+
+
+'player basic usecase relations'
+player --|> hit #Green
+player --|> stand #Green
+player --|> double #Green
+
+'dealer usecase relations'
+dealer --|> accessOptions #blue
+dealer --|> setPlayerCount #blue
+dealer --|> shuffleCards #blue 
+dealer --|> dealChips #blue 
+dealer --|> dealCards #blue
+'console usecase relations'
+Console --|> countScore #Red
+Console --|> determineWinner #REd
+determineWinner --|> giveScore #red
+giveScore --|> dealer #orange
+'include and extends relations'
+
+giveScore <.. countScore #orange : extends
+accessOptions <.. setPlayerCount #DarkBlue : extends
+shuffleCards ..> countScore #DarkBlue : include
+dealChips ..> countScore #DarkBlue : include
+dealCards ..> countScore #DarkBlue : include
+
+@enduml
