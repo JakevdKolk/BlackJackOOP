@@ -12,7 +12,6 @@ namespace BlackJackOOP
 
             BlackjackSetup setup = new BlackjackSetup();
             List<PlayerBasic> players = setup.blackjackUserOptions();
-            Card card = new Card();
             blackjackAI ai = new blackjackAI();
 
             CardDeck cardDeck = new CardDeck();
@@ -23,17 +22,17 @@ namespace BlackJackOOP
             Dealer dealer = new Dealer();
             cardDeck.initializeDeck();
 
-            Chips chips = new Chips();
+            Chips chips = new Chips(dealer);
 
-            //chips.initializeChipCount(player);
+            chips.initializePlayerChipCount(players, dealer);
 
-            PlayerBasic player = new PlayerBasic(); 
-            player.Name = "Test";
+
 
             cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
 
             foreach (PlayerBasic p in players)
             {
+
                 
 
                 dealer.giveOutCards(cardDeck.cardDeck, p);
@@ -53,7 +52,7 @@ namespace BlackJackOOP
 
 
 
-
+                   Console.WriteLine(p.Name + " has " + p.pointCount + " points");
 
 
 

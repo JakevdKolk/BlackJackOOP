@@ -69,7 +69,7 @@
                 {
                     actionsList.Add("stand");
                 }
-                else
+                else if (player.Name != "Dealer")
                 {
                     actionsList.Add("stand");
                 }
@@ -83,7 +83,7 @@
             return [""];
         }
 
-        public bool checkIfDouble(PlayerBasic player)
+        private bool checkIfDouble(PlayerBasic player)
         {
             if (checkItemContains(player, [9, 10, 11]) && player.Cards.Keys.Contains("Ace Of"))
             {
@@ -92,7 +92,7 @@
             return false;
         }
 
-        public bool checkItemContains(PlayerBasic player, int[] checkItems)
+        private bool checkItemContains(PlayerBasic player, int[] checkItems)
         {
 
             foreach (int item in checkItems)

@@ -28,7 +28,17 @@ namespace BlackJackOOP
       public void Hit(Dealer dealer, IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
             Console.WriteLine(player.Name + " has hit!!");
-            dealer.giveOutCards(deckOfCards, player);
+           string dealerInput = dealer.checkHit(player);
+            if(dealerInput == "1")
+            {
+                dealer.giveOutCards(deckOfCards, player);
+
+            }
+            else if(dealerInput == "2")
+            {
+                Console.WriteLine("You didn't give " + player.Name + " a card!!!!");
+                //decrease score
+            }
             checkPointCount(player);
 
         }

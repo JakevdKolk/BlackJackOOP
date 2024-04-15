@@ -5,6 +5,8 @@ namespace BlackJackOOP
 {
     internal class Dealer : PlayerBasic
     {
+        public int tableChips { get; set; }
+
         public Dealer() {
 
             
@@ -17,7 +19,7 @@ namespace BlackJackOOP
             // Convert the dictionary to a list of KeyValuePair
             var list = deckOfCards.ToList();
             
-            // Create a new random number generator
+            // Create a new random  number generator
             var rng = new Random();
 
             // Shuffle the list
@@ -51,8 +53,6 @@ namespace BlackJackOOP
 
             // Add the first card to player's cards
             player.Cards.Add(firstCardPair.Key, firstCardPair.Value);
-            Console.Write("First card pair ");
-            Console.WriteLine(firstCardPair.Key);
             // Remove the first card from the deck
             deckOfCards.Remove(firstCardPair.Key);
             if (!player.checkIfBust(player))
@@ -63,6 +63,15 @@ namespace BlackJackOOP
 
             return;
 
+
+        }
+
+        public string checkHit(PlayerBasic player)
+        {
+            Console.WriteLine("what will you do Dealer?");
+            Console.WriteLine("1 give him a card, 2 don't give him a card");
+           string userInput = Console.ReadLine();
+            return userInput;
 
         }
 
