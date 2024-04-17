@@ -74,58 +74,7 @@ namespace BlackJackOOP
                 
             }
             }
-            /*
-           
 
-
-
-            cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
-
-
-
-                foreach (KeyValuePair<string, int> cardType in cardDeck.cardDeck)
-            {
-                Console.Write(cardType.Key);
-                Console.WriteLine(cardType.Value);
-
-            }
-
-            //give out two cards
-          
-          
-            player.Hit(dealer, cardDeck.cardDeck, player);
-            Console.WriteLine("Hit");
-            //player.Hit(dealer, cardDeck.cardDeck, player);
-            player.stand(player);
-
-
-            Console.Write("Pointcount: ");
-            Console.WriteLine(player.pointCount);
-            Console.WriteLine("Chips: ");
-            Console.Write(player.chips);
-
-            Console.WriteLine("second loop");
-            foreach (KeyValuePair<string, int> cardType in player.Cards)
-            {
-                Console.Write(cardType.Key);
-                Console.WriteLine(cardType.Value);
-
-            }
-
-
-
-
-
-
-
-
-
-            //            foreach (string deck in deckOfCards)
-            //            {
-            //              Console.WriteLine(deck);
-            //        }
-
-            */
         }
     }
 }

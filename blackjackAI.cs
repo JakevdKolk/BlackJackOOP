@@ -14,7 +14,8 @@ namespace BlackJackOOP
             return false;
         }
 
-        public void handleWinner(List<PlayerBasic> players, Dealer dealer)
+        public void handleWinner(List<PlayerBasic> players, Dealer dealer, handleGame calcGrade)
+
         {
             
             int highestPointCount = 0;
@@ -40,27 +41,28 @@ namespace BlackJackOOP
                     {  
                          dealerInput = dealer.checkAction("chips");
                     }
+
                     if (dealerInput == "1" && player.Name != "Dealer")
                     {
                         dealer.giveChips(player, dealer);
                     }
-                    else if (dealerInput == "2")
-                    {
-                        //get rid of one point at the point total
-                    }
                     else
                     {
-                        handleWinner(players, dealer);
+                        calcGrade.calcGrade();
                     }
+                    
+
                 }
                 else
                 {
                     player.giveChips(player, dealer);
                 }
                 winnerIndex++;
+                calcGrade.getGrade();
             }
         }
-        public void dealerActions(Dealer dealer, PlayerBasic player, IDictionary<string, int> deckOfCards)
+        public void dealerActions(Dealer dealer, PlayerBasic player, IDictionary<string, int> deckOfCards, handleGame calcGrade)
+
         {
             string[] actions = getActions(player);
             Console.Write("you can ");
@@ -76,7 +78,9 @@ namespace BlackJackOOP
             {
                 if (action == playerAction && action == "hit")
                 {
-                    player.Hit(dealer, deckOfCards, player);
+                    player.Hit(dealer, deckOfCards, player , calcGrade);
+                  
+
                 }
                 else if (action == playerAction && action == "double")
                 {
@@ -88,11 +92,12 @@ namespace BlackJackOOP
                 }
             }
         }
-        public void Handle_actions(Dealer dealer,PlayerBasic player, IDictionary<string, int> deckOfCards)
+        public void Handle_actions(Dealer dealer,PlayerBasic player, IDictionary<string, int> deckOfCards , handleGame calcGrade)
         {
             if(player.Name == "Dealer")
             {
-                dealerActions(dealer, player, deckOfCards);
+                dealerActions(dealer, player, deckOfCards , calcGrade);
+
                 
             }
             else
@@ -110,12 +115,11 @@ namespace BlackJackOOP
                 else
                 {
 
-                    player.Hit(dealer, deckOfCards, player);
+                    player.Hit(dealer, deckOfCards, player , calcGrade);
                 }
+                return;
             }
-           
-
-            
+   
 
         }
 
