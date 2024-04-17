@@ -14,7 +14,7 @@ namespace BlackJackOOP
             return false;
         }
 
-        public void handleWinner(List<PlayerBasic> players)
+        public void handleWinner(List<PlayerBasic> players, Dealer dealer)
         {
             
             int highestPointCount = 0;
@@ -35,6 +35,27 @@ namespace BlackJackOOP
             {
                 if (winners[winnerIndex] == true) {
                     Console.WriteLine(player.Name + " has won");
+                    string dealerInput = "";
+                    if(player.Name != "Dealer")
+                    {  
+                         dealerInput = dealer.checkAction("chips");
+                    }
+                    if (dealerInput == "1" && player.Name != "Dealer")
+                    {
+                        dealer.giveChips(player, dealer);
+                    }
+                    else if (dealerInput == "2")
+                    {
+                        //get rid of one point at the point total
+                    }
+                    else
+                    {
+                        handleWinner(players, dealer);
+                    }
+                }
+                else
+                {
+                    player.giveChips(player, dealer);
                 }
                 winnerIndex++;
             }

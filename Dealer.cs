@@ -85,6 +85,12 @@ namespace BlackJackOOP
 
         }
 
+        public void giveChips(PlayerBasic player, Dealer dealer)
+        {
+            int giveChips = dealer.tableChips / 10;
+            player.pointCount += giveChips;
+        }
+
         private string[] removeFirstIndexOfArray(string[] arrayOfValues)
         {
             // Create a smaller array

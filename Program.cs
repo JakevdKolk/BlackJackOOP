@@ -16,8 +16,6 @@ namespace BlackJackOOP
 
             CardDeck cardDeck = new CardDeck();
 
-
-
             //Initialze dealer
             Dealer dealer = new Dealer();
             cardDeck.initializeDeck();
@@ -26,25 +24,23 @@ namespace BlackJackOOP
 
             chips.initializePlayerChipCount(players, dealer);
 
-
-
             cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
             bool allPlayersStood = false;
             int playerCount = players.Count;
             int playersWhoHaveStood = 0;
             int[] dupes = new int[playerCount];
             dealer.giveOutFirstCard(cardDeck, players);
+            Console.WriteLine("The table has " + dealer.tableChips + " chips");
             while (allPlayersStood == false) {
                 int playersIndex = 0;
                 foreach (PlayerBasic p in players)
             {
 
 
-                    dealer.giveOutCards(cardDeck.cardDeck, p);
 
                     if (playerCount == playersWhoHaveStood)
                     {
-                        ai.handleWinner(players);
+                        ai.handleWinner(players , dealer);
                         allPlayersStood = true;
                         break;
                     }
@@ -59,12 +55,14 @@ namespace BlackJackOOP
 
 
 
-                   if(!p.checkIfBust(p)) {
+                    if (!p.checkIfBust(p))
+                    {
 
-                       ai.Handle_actions(dealer, p, cardDeck.cardDeck);
+                        ai.Handle_actions(dealer, p, cardDeck.cardDeck);
 
 
                     }
+                    
 
 
 

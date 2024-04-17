@@ -41,6 +41,12 @@ namespace BlackJackOOP
             }
 
         }
+
+        public void giveChips(PlayerBasic player , Dealer dealer)
+        {
+            player.chips = player.chips / 4;
+            dealer.tableChips = dealer.tableChips + player.chips;
+        }
         public void stand(PlayerBasic player) {
 
             
