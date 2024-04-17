@@ -1,8 +1,13 @@
-﻿namespace BlackJackOOP
+﻿using System.Collections.Generic;
+using System.Numerics;
+
+namespace BlackJackOOP
 {
     internal class Program
     {
-        static void Main(string[] args)
+
+ 
+        static void Main()
         {
 
             BlackjackSetup setup = new BlackjackSetup();
@@ -69,7 +74,7 @@
                 
             }
             }
-         
+
         }
     }
 }

@@ -15,6 +15,7 @@ namespace BlackJackOOP
         }
 
         public void handleWinner(List<PlayerBasic> players, Dealer dealer, handleGame calcGrade)
+
         {
             
             int highestPointCount = 0;
@@ -40,7 +41,7 @@ namespace BlackJackOOP
                     {  
                          dealerInput = dealer.checkAction("chips");
                     }
-                   
+
                     if (dealerInput == "1" && player.Name != "Dealer")
                     {
                         dealer.giveChips(player, dealer);
@@ -50,6 +51,7 @@ namespace BlackJackOOP
                         calcGrade.calcGrade();
                     }
                     
+
                 }
                 else
                 {
@@ -60,6 +62,7 @@ namespace BlackJackOOP
             }
         }
         public void dealerActions(Dealer dealer, PlayerBasic player, IDictionary<string, int> deckOfCards, handleGame calcGrade)
+
         {
             string[] actions = getActions(player);
             Console.Write("you can ");
@@ -77,6 +80,7 @@ namespace BlackJackOOP
                 {
                     player.Hit(dealer, deckOfCards, player , calcGrade);
                   
+
                 }
                 else if (action == playerAction && action == "double")
                 {
@@ -93,6 +97,7 @@ namespace BlackJackOOP
             if(player.Name == "Dealer")
             {
                 dealerActions(dealer, player, deckOfCards , calcGrade);
+
                 
             }
             else
@@ -115,6 +120,7 @@ namespace BlackJackOOP
                 return;
             }
    
+
         }
 
         private string[] getActions(PlayerBasic player) {

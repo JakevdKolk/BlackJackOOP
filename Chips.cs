@@ -28,6 +28,7 @@ namespace BlackJackOOP
 
 
         public void initializePlayerChipCount(List<PlayerBasic> players, Dealer dealer, handleGame calcGrade)
+
         {
             int playercount = players.Skip(1).Count();
 
@@ -48,10 +49,12 @@ namespace BlackJackOOP
                 Console.WriteLine("dealer didn't give the players chips");
                 calcGrade.calcGrade();
 
+
             }
             else
             {
                 initializePlayerChipCount(players, dealer, calcGrade);
+
             }
         }
 

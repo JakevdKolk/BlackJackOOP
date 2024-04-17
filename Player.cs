@@ -26,6 +26,7 @@ namespace BlackJackOOP
 
       
       public void Hit(Dealer dealer, IDictionary<string, int> deckOfCards, PlayerBasic player, handleGame calcGrade)
+
         {
             Console.WriteLine(player.Name + " has hit!!");
            string dealerInput = dealer.checkAction("a card");
@@ -38,6 +39,7 @@ namespace BlackJackOOP
             {
                 Console.WriteLine("You didn't give " + player.Name + " a card!!!!");
                 calcGrade.calcGrade();
+
             }
 
         }
