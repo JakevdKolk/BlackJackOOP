@@ -17,31 +17,37 @@
     class Dealer{
         + shuffleCards(deckOfCards:string[]):string[]
         + giveOutCards(deckOfCards:string[], player:PlayerBasic):string[]
-        + dealChips(chips)
+        + giveChips(player:PlayerBasic, dealer:Dealer):string
+        + checkAction(action:string):string
         - removeFirstIndexOfArray(arrayOfValues:string[]):string[]
 
     }
     class PlayerBasic{
-        + checkWinner()
         + recieveCards(card:string):void
-        + countChips()
-        + hit(dealer:Dealer, deckOfCards:[String, Int], player:PlayerBasic):void
+        + hit(dealer:Dealer, deckOfCards:[String, Int], player:PlayerBasic, calcGrade:HandleGame):void
         + stand(player:PlayerBasic):void
         + double(player:PlayerBasic):void
+        + giveChips(player:PlayerBasic,dealer:Dealer):void
         + checkIfBust(player:PlayerBasic):bool
         - checkPointCount(player:PlayerBasic):void
+    }
+    class HandleGame{
+      + calcGrade():void
+      + getGrade():int
     }
     class Chips{
      + initializeChipCount(player:PlayerBasic):void
     }
     class blackjackAI{
-      + handle_actions(dealer:Dealer,player:PlayerBasic,deckOfCards:[String,Int]):void
+      + checkGameStatus(playerIndex:int,dupe:int):bool
+      + handleWinner(player:List<PlayerBasic>,dealer:Dealer,calcGrade:HandleGame):void
+      + dealerActions(dealer:Dealer,player:PlayerBasic,deckOfCards:[String,Int], calcGrade:HandleGame):void
+      + handle_actions(dealer:Dealer,player:PlayerBasic,deckOfCards:[String,Int], calcGrade:HandleGame):void
       - getActions(player:PlayerBasic):string[]
       - checkIfDouble(player:PlayerBasic):bool
       - checkItemContains(player:PlayerBasic, checkItems:int[]):bool
     }
 
     Dealer <|-- PlayerBasic
-    DealerScore <|-- Dealer
 
 @enduml
