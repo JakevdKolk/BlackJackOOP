@@ -28,9 +28,24 @@ namespace BlackJackOOP
       public void Hit(Dealer dealer, IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
             Console.WriteLine(player.Name + " has hit!!");
-            dealer.giveOutCards(deckOfCards, player);
-            checkPointCount(player);
+           string dealerInput = dealer.checkAction("a card");
+            if(dealerInput == "1")
+            {
+                dealer.giveOutCards(deckOfCards, player);
 
+            }
+            else if(dealerInput == "2")
+            {
+                Console.WriteLine("You didn't give " + player.Name + " a card!!!!");
+                //decrease score
+            }
+
+        }
+
+        public void giveChips(PlayerBasic player , Dealer dealer)
+        {
+            player.chips = player.chips / 4;
+            dealer.tableChips = dealer.tableChips + player.chips;
         }
         public void stand(PlayerBasic player) {
 
@@ -55,6 +70,7 @@ namespace BlackJackOOP
             if (player.pointCount > 21)
             {
                 Console.WriteLine("You lost!!!");
+                player.hasStood = true;
                 return true;
             }
            

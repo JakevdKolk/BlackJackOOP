@@ -12,52 +12,67 @@ namespace BlackJackOOP
 
             BlackjackSetup setup = new BlackjackSetup();
             List<PlayerBasic> players = setup.blackjackUserOptions();
-            Card card = new Card();
             blackjackAI ai = new blackjackAI();
 
             CardDeck cardDeck = new CardDeck();
-
-
 
             //Initialze dealer
             Dealer dealer = new Dealer();
             cardDeck.initializeDeck();
 
-            Chips chips = new Chips();
+            Chips chips = new Chips(dealer);
 
-            //chips.initializeChipCount(player);
-
-            PlayerBasic player = new PlayerBasic(); 
-            player.Name = "Test";
+            chips.initializePlayerChipCount(players, dealer);
 
             cardDeck.cardDeck = dealer.shuffleCards(cardDeck.cardDeck);
-
-            foreach (PlayerBasic p in players)
+            bool allPlayersStood = false;
+            int playerCount = players.Count;
+            int playersWhoHaveStood = 0;
+            int[] dupes = new int[playerCount];
+            dealer.giveOutFirstCard(cardDeck, players);
+            Console.WriteLine("The table has " + dealer.tableChips + " chips");
+            while (allPlayersStood == false) {
+                int playersIndex = 0;
+                foreach (PlayerBasic p in players)
             {
-                
 
-                dealer.giveOutCards(cardDeck.cardDeck, p);
 
+
+                    if (playerCount == playersWhoHaveStood)
+                    {
+                        ai.handleWinner(players , dealer);
+                        allPlayersStood = true;
+                        break;
+                    }
+                    if (ai.checkGameStatus(playersIndex, dupes[playersIndex]))
+                    {
+                        dupes[playersIndex] = playersIndex;
+                        playersWhoHaveStood++;
+                    }
+      
                 
                     Console.WriteLine("its " + p.Name + " turn");
 
 
 
-                   if(!p.checkIfBust(p)) {
+                    if (!p.checkIfBust(p))
+                    {
 
-                       ai.Handle_actions(dealer, p, cardDeck.cardDeck);
+                        ai.Handle_actions(dealer, p, cardDeck.cardDeck);
 
 
                     }
+                    
 
 
 
 
+                   Console.WriteLine(p.Name + " has " + p.pointCount + " points");
 
 
-
-
+                    playersIndex++;
                 
+            }
             }
             /*
            

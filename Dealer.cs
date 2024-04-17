@@ -5,6 +5,8 @@ namespace BlackJackOOP
 {
     internal class Dealer : PlayerBasic
     {
+        public int tableChips { get; set; }
+
         public Dealer() {
 
             
@@ -17,7 +19,7 @@ namespace BlackJackOOP
             // Convert the dictionary to a list of KeyValuePair
             var list = deckOfCards.ToList();
             
-            // Create a new random number generator
+            // Create a new random  number generator
             var rng = new Random();
 
             // Shuffle the list
@@ -36,12 +38,22 @@ namespace BlackJackOOP
     
             
         }
+        public void giveOutFirstCard(CardDeck cardDeck, List<PlayerBasic> players)
+        {
+            foreach (PlayerBasic player in players)
+            {
+                giveOutCards(cardDeck.cardDeck, player);
 
-    
+            }
+
+        }
+
+
         public void giveOutCards(IDictionary<string, int> deckOfCards, PlayerBasic player)
         {
 
             // Get first Card
+   
             KeyValuePair<string, int> firstCardPair = deckOfCards.First();
 
             if (player.Cards == null)
@@ -51,8 +63,6 @@ namespace BlackJackOOP
 
             // Add the first card to player's cards
             player.Cards.Add(firstCardPair.Key, firstCardPair.Value);
-            Console.Write("First card pair ");
-            Console.WriteLine(firstCardPair.Key);
             // Remove the first card from the deck
             deckOfCards.Remove(firstCardPair.Key);
             if (!player.checkIfBust(player))
@@ -64,6 +74,21 @@ namespace BlackJackOOP
             return;
 
 
+        }
+
+        public string checkAction(string action)
+        {
+            Console.WriteLine("what will you do Dealer?");
+            Console.WriteLine("1 give " + action + ", 2 don't give " + action);
+           string userInput = Console.ReadLine();
+            return userInput;
+
+        }
+
+        public void giveChips(PlayerBasic player, Dealer dealer)
+        {
+            int giveChips = dealer.tableChips / 10;
+            player.pointCount += giveChips;
         }
 
         private string[] removeFirstIndexOfArray(string[] arrayOfValues)

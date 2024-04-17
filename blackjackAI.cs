@@ -1,37 +1,98 @@
-﻿namespace BlackJackOOP
+﻿using System.Numerics;
+using System;
+
+namespace BlackJackOOP
 {
     internal class blackjackAI
     {
+        public bool checkGameStatus(int playerIndex, int dupe) {
+            if(playerIndex == dupe)
+            {
+                return true;
 
+            }
+            return false;
+        }
+
+        public void handleWinner(List<PlayerBasic> players, Dealer dealer)
+        {
+            
+            int highestPointCount = 0;
+            int winnerIndex = 0;
+            bool[] winners = new bool[players.Count];
+            foreach(PlayerBasic player in players)
+            {
+                if(player.pointCount >= highestPointCount && player.pointCount <= 21)
+                {
+                    Console.WriteLine(player.pointCount);
+                    winners[winnerIndex] = true;
+                    highestPointCount = player.pointCount;
+                }
+                winnerIndex++;
+            }
+            winnerIndex = 0;
+            foreach(PlayerBasic player in players)
+            {
+                if (winners[winnerIndex] == true) {
+                    Console.WriteLine(player.Name + " has won");
+                    string dealerInput = "";
+                    if(player.Name != "Dealer")
+                    {  
+                         dealerInput = dealer.checkAction("chips");
+                    }
+                    if (dealerInput == "1" && player.Name != "Dealer")
+                    {
+                        dealer.giveChips(player, dealer);
+                    }
+                    else if (dealerInput == "2")
+                    {
+                        //get rid of one point at the point total
+                    }
+                    else
+                    {
+                        handleWinner(players, dealer);
+                    }
+                }
+                else
+                {
+                    player.giveChips(player, dealer);
+                }
+                winnerIndex++;
+            }
+        }
+        public void dealerActions(Dealer dealer, PlayerBasic player, IDictionary<string, int> deckOfCards)
+        {
+            string[] actions = getActions(player);
+            Console.Write("you can ");
+
+            for (int i = 0; i < actions.Length; i++)
+            {
+                Console.Write(actions[i] + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("What whould you like to do: ");
+            string playerAction = Console.ReadLine();
+            foreach (string action in actions)
+            {
+                if (action == playerAction && action == "hit")
+                {
+                    player.Hit(dealer, deckOfCards, player);
+                }
+                else if (action == playerAction && action == "double")
+                {
+                    player.Double(player);
+                }
+                else if (action == playerAction && action == "stand")
+                {
+                    player.stand(player);
+                }
+            }
+        }
         public void Handle_actions(Dealer dealer,PlayerBasic player, IDictionary<string, int> deckOfCards)
         {
-           string[] actions = getActions(player);
             if(player.Name == "Dealer")
             {
-                Console.WriteLine(player.Name + " you have " + player.pointCount + " points");
-                Console.Write("you can ");
-                for(int i = 0; i < actions.Length; i++)
-                {
-                    Console.Write(actions[i] + " ");
-                }
-                Console.WriteLine();
-                Console.WriteLine("What whould you like to do: ");
-                string playerAction = Console.ReadLine();
-                foreach(string action in actions)
-                {
-                    if (action == playerAction && action == "hit")
-                    {
-                        player.Hit(dealer, deckOfCards, player);
-                    }
-                    else if (action == playerAction && action == "double")
-                    {
-                        player.Double(player);
-                    }
-                    else if(action == playerAction && action == "stand")
-                    {
-                        player.stand(player);
-                    }
-                }
+                dealerActions(dealer, player, deckOfCards);
                 
             }
             else
@@ -63,8 +124,16 @@
 
             if (!player.hasStood)
             {
-                string[] actions = ["hit", "stand"];
+                string[] actions = ["hit"];
                 List<string> actionsList = new List<string>(actions);
+                if(player.Name == "Dealer" && player.pointCount > 17)
+                {
+                    actionsList.Add("stand");
+                }
+                else if (player.Name != "Dealer")
+                {
+                    actionsList.Add("stand");
+                }
                 if (checkIfDouble(player))
                 {
                     actionsList.Add("double");                   
@@ -75,7 +144,7 @@
             return [""];
         }
 
-        public bool checkIfDouble(PlayerBasic player)
+        private bool checkIfDouble(PlayerBasic player)
         {
             if (checkItemContains(player, [9, 10, 11]) && player.Cards.Keys.Contains("Ace Of"))
             {
@@ -84,7 +153,7 @@
             return false;
         }
 
-        public bool checkItemContains(PlayerBasic player, int[] checkItems)
+        private bool checkItemContains(PlayerBasic player, int[] checkItems)
         {
 
             foreach (int item in checkItems)
